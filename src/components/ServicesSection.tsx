@@ -65,29 +65,29 @@ const textVariants = {
 
 const ServicesSection = () => {
   return (
-    <section id='services' className="relative py-24 bg-gradient-to-br from-slate-900 via-black to-slate-800 overflow-hidden">
-      {/* Animated background elements */}
-<div className="absolute inset-0 bg-[url('/web/bg-1.webp')] bg-cover bg-center opacity-20" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/95 via-black/80 to-black/95" />
+    <section id='services' className="relative py-32 bg-[#050505] overflow-hidden">
+      {/* Background texture */}
+      <div className="absolute inset-0 bg-[url('/web/bg-1.webp')] bg-cover bg-center opacity-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-[#0a0a0a] to-[#050505]" />
       
-      {/* Floating orbs for modern effect */}
+      {/* Floating accent orbs */}
       <motion.div
         animate={{ 
           x: [0, -100, 0],
           y: [0, 50, 0],
-          opacity: [0.2, 0.4, 0.2]
+          opacity: [0.1, 0.2, 0.1]
         }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-32 right-20 w-40 h-40 bg-green-500/20 rounded-full blur-xl"
+        className="absolute top-32 right-20 w-40 h-40 bg-[#e8a43a]/10 rounded-full blur-3xl"
       />
       <motion.div
         animate={{ 
           x: [0, 80, 0],
           y: [0, -60, 0],
-          opacity: [0.3, 0.6, 0.3]
+          opacity: [0.15, 0.25, 0.15]
         }}
         transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-32 left-20 w-32 h-32 bg-blue-500/20 rounded-full blur-xl"
+        className="absolute bottom-32 left-20 w-32 h-32 bg-[#e8a43a]/5 rounded-full blur-3xl"
       />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
@@ -98,31 +98,36 @@ const ServicesSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
         >
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-[#e8a43a] text-sm uppercase tracking-[0.3em] mb-4"
+          >
+            What We Offer
+          </motion.p>
           <motion.h2 
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase text-white leading-tight deadwood-font relative mb-6"
+            className="text-5xl sm:text-7xl lg:text-8xl font-extrabold uppercase text-[#f5f5f5] leading-none tracking-tight relative mb-6"
           >
-            <span className="bg-gradient-to-r from-white via-green-100 to-white bg-clip-text text-transparent">
-              OUR
-            </span>
+            <span className="text-gradient-amber">OUR</span>
             <br />
-            <span className="bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
-              SERVICES
-            </span>
+            <span className="text-[#f5f5f5]">SERVICES</span>
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               transition={{ duration: 1, delay: 0.5 }}
-              className="absolute -bottom-2 left-1/2 -translate-x-1/2 h-1 bg-gradient-to-r from-green-400 to-green-600 origin-center w-48"
+              className="absolute -bottom-2 left-1/2 -translate-x-1/2 h-1 w-48 bg-gradient-to-r from-[#e8a43a] to-[#e8a43a]/50"
             />
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg text-gray-300 max-w-2xl mx-auto"
+            className="text-lg text-[#a0a0a0] max-w-2xl mx-auto"
           >
             Professional tattoo services delivered with precision, creativity, and care in the heart of Pretoria.
           </motion.p>

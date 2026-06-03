@@ -37,17 +37,20 @@ const Contact = () => {
         <div className="absolute inset-0 bg-[url('/imgs/bg-1.jpg')] bg-cover bg-center opacity-20" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/95 via-black/80 to-black/95" />
 
-        {/* Animated Background Blobs */}
+        {/* Floating accent orbs */}
         <motion.div
-          animate={{ x: [0, 120, 0], y: [0, -60, 0], opacity: [0.2, 0.5, 0.2] }}
+          animate={{ x: [0, 120, 0], y: [0, -60, 0], opacity: [0.1, 0.2, 0.1] }}
           transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute top-20 right-20 w-48 h-48 bg-green-500/20 rounded-full blur-xl"
+          className="absolute top-20 right-20 w-48 h-48 bg-[#e8a43a]/10 rounded-full blur-3xl"
         />
         <motion.div
-          animate={{ x: [0, -80, 0], y: [0, 80, 0], opacity: [0.3, 0.6, 0.3] }}
+          animate={{ x: [0, -80, 0], y: [0, 80, 0], opacity: [0.15, 0.25, 0.15] }}
           transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute bottom-32 left-20 w-40 h-40 bg-blue-500/20 rounded-full blur-xl"
+          className="absolute bottom-32 left-20 w-40 h-40 bg-[#e8a43a]/5 rounded-full blur-3xl"
         />
+
+        {/* Top accent line */}
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#e8a43a]/30 to-transparent" />
 
         {/* Content Container */}
         <div className="relative z-10 w-full flex flex-col items-center">
@@ -61,13 +64,13 @@ const Contact = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl sm:text-6xl lg:text-7xl sm:mt-5 font-extrabold uppercase text-white leading-tight deadwood-font relative mb-6"
+              className="text-5xl sm:text-7xl lg:text-8xl font-extrabold uppercase text-[#f5f5f5] leading-none tracking-tight relative mb-6"
             >
-              <span className="bg-gradient-to-r from-white via-green-100 to-white md:mr-[800px] bg-clip-text text-transparent">
+              <span className="text-gradient-amber">
                 CONTACT
               </span>
               <br />
-              <span className="bg-gradient-to-r from-green-400 to-green-600 bg-clip-text md:mr-[500px] text-transparent">
+              <span className="text-[#f5f5f5]">
                 US
               </span>
               <motion.div
