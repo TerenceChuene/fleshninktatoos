@@ -5,7 +5,7 @@ import "../styles/fonts.css";
 
 const Hero = () => {
   const [showContent, setShowContent] = useState<boolean>(false);
-  const [isVideoComplete, setIsVideoComplete] = useState(false);
+  
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
@@ -27,7 +27,7 @@ const Hero = () => {
         video.pause();
         video.style.display = "none";
         setShowContent(true);
-        setIsVideoComplete(true);
+        
       }, 3000);
 
       return () => {
@@ -67,7 +67,7 @@ const Hero = () => {
       await flipControls.start({
         opacity: 1,
         x: 0,
-        transition: { duration: 1, ease: "easeOut" },
+        transition: { duration: 1, ease: "easeOut" as const },
       });
 
       playFlip();

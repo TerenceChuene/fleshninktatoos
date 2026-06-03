@@ -8,7 +8,7 @@ const LogoCircle = ({ className = '' }) => (
   <motion.div 
     initial={{ opacity: 0, scale: 0.8 }}
     whileInView={{ opacity: 1, scale: 1 }}
-    transition={{ duration: 0.8, ease: "easeOut" }}
+    transition={{ duration: 0.8, ease: "easeOut" as const }}
     className={`h-32 w-32 md:h-48 md:w-48 bg-[url('/imgs/logo-3.png')] bg-cover bg-center rounded-full border-4 border-[#e8a43a]/30 bg-[#0a0a0a] ${className}`} 
   />
 );
@@ -32,7 +32,7 @@ const cardVariants = {
     scale: 1,
     transition: {
       duration: 0.6,
-      ease: "easeOut"
+      ease: "easeOut" as const
     }
   }
 };
@@ -132,7 +132,7 @@ const ArtistSection = () => {
           viewport={{ once: true, margin: "-100px" }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {artistsData.map((artist, idx) => (
+          {artistsData.map((artist) => (
             <motion.div
               key={artist.id}
               variants={cardVariants}
@@ -200,7 +200,7 @@ const ArtistSection = () => {
                     {artist.specialty}
                   </p>
                   <p className="text-[#666666] text-sm mb-6 line-clamp-2">
-                    {artist.bio?.substring(0, 80) || 'Talented tattoo artist specializing in unique designs.'}
+                    {artist.description.substring(0, 80) || 'Talented tattoo artist specializing in unique designs.'}
                   </p>
                   
                   {/* CTA Button */}
