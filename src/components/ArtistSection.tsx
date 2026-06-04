@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+
 import { motion } from 'framer-motion';
 import { CardContent } from '@/components/ui/card';
 import { FaInstagram, FaEye } from 'react-icons/fa';
@@ -204,7 +204,7 @@ const ArtistSection = () => {
                   </p>
                   
                   {/* CTA Button */}
-                  <Link to={`/artist/${artist.id}`}>
+                  <a href={`/artist/${artist.id}`}>
                     <motion.button
                       whileHover={{ 
                         scale: 1.02,
@@ -215,7 +215,7 @@ const ArtistSection = () => {
                     >
                       View Portfolio
                     </motion.button>
-                  </Link>
+                  </a>
                 </CardContent>
               </div>
             </motion.div>

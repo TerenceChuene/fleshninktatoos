@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar';
+import Coursel from '../components/Coursel';
+import Footer from '../components/Footer';
+---
+
+<BaseLayout title="Gallery - FLESH-N-INK TATTOOS">
+  <Navbar client:load />
+  <div class="pt-20">
+    <Coursel client:load />
+  </div>
+  <Footer client:visible />
+</BaseLayout>

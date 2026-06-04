@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar';
+import Hero from '../components/Hero';
+import About from '../components/About';
+import ArtistSection from '../components/ArtistSection';
+import ServicesSection from '../components/ServicesSection';
+import Gallery from '../components/Gallery';
+import Contact from '../components/Contact';
+import Footer from '../components/Footer';
+---
+
+<BaseLayout title="FLESH-N-INK TATTOOS">
+  <Navbar client:load />
+  <Hero client:load />
+  <div id="about">
+    <About client:visible />
+  </div>
+  <ArtistSection client:visible />
+  <div id="services">
+    <ServicesSection client:visible />
+  </div>
+  <div id="gallery">
+    <Gallery client:visible />
+  </div>
+  <div id="contact">
+    <Contact client:visible />
+  </div>
+  <Footer client:visible />
+</BaseLayout>

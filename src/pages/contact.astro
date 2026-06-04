@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar';
+import Contact from '../components/Contact';
+import Footer from '../components/Footer';
+---
+
+<BaseLayout title="Contact - FLESH-N-INK TATTOOS">
+  <Navbar client:load />
+  <div id="contact">
+    <Contact client:visible />
+  </div>
+  <Footer client:visible />
+</BaseLayout>

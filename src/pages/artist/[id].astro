@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar';
+import ArtistPortfolio from '../../components/ArtistPortfolio';
+import Footer from '../../components/Footer';
+import { artistsData } from '../../config/artistData';
+
+export function getStaticPaths() {
+  return artistsData.map((artist) => ({
+    params: { id: String(artist.id) },
+  }));
+}
+
+const { id } = Astro.params;
+---
+
+<BaseLayout title="Artist Portfolio - FLESH-N-INK TATTOOS">
+  <Navbar client:load />
+  <ArtistPortfolio client:load artistId={id} />
+  <Footer client:visible />
+</BaseLayout>

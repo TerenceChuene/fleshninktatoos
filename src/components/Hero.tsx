@@ -1,53 +1,37 @@
 import { motion, useAnimation, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { FaInstagram, FaFacebookF, FaWhatsapp, FaCalendarAlt } from "react-icons/fa";
-import "../styles/fonts.css";
 
 const Hero = () => {
   const [showContent, setShowContent] = useState<boolean>(false);
-  
-
   const videoRef = useRef<HTMLVideoElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
   const flipControls = useAnimation();
 
-  // Images for background cycling
   const images = ["/imgs/bg4.jpg"];
-
   const [currentImage, setCurrentImage] = useState(0);
 
-  // Play video for 3 seconds, then show content
   useEffect(() => {
     const video = videoRef.current;
-
     if (video) {
       video.play().catch((err) => console.error("Error playing video:", err));
-
       const timer = setTimeout(() => {
         video.pause();
         video.style.display = "none";
         setShowContent(true);
-        
       }, 3000);
-
-      return () => {
-        clearTimeout(timer);
-      };
+      return () => clearTimeout(timer);
     }
   }, []);
 
-  // Cycle background images when content is shown
   useEffect(() => {
     if (!showContent) return;
-
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % images.length);
     }, 5000);
-
     return () => clearInterval(interval);
   }, [showContent]);
 
-  // Flip animation function
   const playFlip = () => {
     flipControls.start({
       rotateY: [0, 180, 0],
@@ -55,66 +39,43 @@ const Hero = () => {
     });
   };
 
-  // Animate content when it's shown
   useEffect(() => {
     if (!showContent) return;
-
     let cleanupFn: (() => void) | undefined;
-
     async function runAnimations() {
       flipControls.set({ opacity: 0, x: 100 });
-
       await flipControls.start({
         opacity: 1,
         x: 0,
         transition: { duration: 1, ease: "easeOut" as const },
       });
-
       playFlip();
-
-      const interval = setInterval(() => {
-        playFlip();
-      }, 90000);
-
+      const interval = setInterval(() => { playFlip(); }, 90000);
       return () => clearInterval(interval);
     }
-
-    runAnimations().then((cleanup) => {
-      cleanupFn = cleanup;
-    });
-
-    return () => {
-      if (cleanupFn) cleanupFn();
-    };
+    runAnimations().then((cleanup) => { cleanupFn = cleanup; });
+    return () => { if (cleanupFn) cleanupFn(); };
   }, [showContent]);
 
-  // Replay flip on scroll into view
   useEffect(() => {
     if (!headingRef.current) return;
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            playFlip();
-          }
+          if (entry.isIntersecting) { playFlip(); }
         });
       },
       { threshold: 0.5 }
     );
-
     observer.observe(headingRef.current);
-
     return () => observer.disconnect();
   }, []);
 
   return (
     <section id="hero" className="relative">
-      {/* Grain Overlay */}
       <div className="grain-overlay fixed inset-0 pointer-events-none z-50" />
       
       <div className="relative h-screen bg-[#050505] overflow-hidden">
-        {/* Video Background */}
         <div className="absolute inset-0 w-full h-full">
           <video
             ref={videoRef}
@@ -124,38 +85,23 @@ const Hero = () => {
             playsInline
             autoPlay
           />
-          
-          {/* Gradient Overlay - Amber tinted */}
           <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#050505]/95 via-[#050505]/80 to-[#050505]/95" />
-          
-          {/* Decorative corner accents */}
           <div className="absolute top-0 left-0 w-32 h-32 border-l-2 border-t-2 border-[#e8a43a]/20" />
           <div className="absolute top-0 right-0 w-32 h-32 border-r-2 border-t-2 border-[#e8a43a]/20" />
           <div className="absolute bottom-0 left-0 w-32 h-32 border-l-2 border-b-2 border-[#e8a43a]/20" />
           <div className="absolute bottom-0 right-0 w-32 h-32 border-r-2 border-b-2 border-[#e8a43a]/20" />
-          
-          {/* Floating orbs with amber glow */}
           <motion.div
-            animate={{ 
-              x: [0, 150, 0],
-              y: [0, -80, 0],
-              opacity: [0.15, 0.3, 0.15]
-            }}
+            animate={{ x: [0, 150, 0], y: [0, -80, 0], opacity: [0.15, 0.3, 0.15] }}
             transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
             className="absolute top-20 right-20 w-60 h-60 bg-[#e8a43a]/10 rounded-full blur-3xl"
           />
           <motion.div
-            animate={{ 
-              x: [0, -100, 0],
-              y: [0, 100, 0],
-              opacity: [0.1, 0.25, 0.1]
-            }}
+            animate={{ x: [0, -100, 0], y: [0, 100, 0], opacity: [0.1, 0.25, 0.1] }}
             transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
             className="absolute bottom-20 left-20 w-48 h-48 bg-[#e8a43a]/10 rounded-full blur-3xl"
           />
         </div>
 
-        {/* Background Image Animation */}
         {showContent && (
           <AnimatePresence>
             <motion.div
@@ -170,7 +116,6 @@ const Hero = () => {
           </AnimatePresence>
         )}
 
-        {/* Main Content */}
         {showContent && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -179,7 +124,6 @@ const Hero = () => {
             className="relative z-10 flex flex-col justify-center h-full px-4 sm:px-8 md:px-24"
           >
             <div className="flex flex-col lg:flex-row items-center lg:items-center gap-12 w-full">
-              {/* Logo Section - Refined */}
               <motion.div 
                 initial={{ opacity: 0, scale: 0.5, x: -100 }}
                 animate={{ opacity: 1, scale: 1, x: 0 }}
@@ -187,19 +131,16 @@ const Hero = () => {
                 className="flex-shrink-0"
               >
                 <div className="relative">
-                  {/* Outer decorative ring */}
                   <motion.div 
                     animate={{ rotate: 360 }}
                     transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
                     className="absolute inset-[-20px] rounded-full border border-[#e8a43a]/20"
                   />
-                  {/* Secondary ring */}
                   <motion.div 
                     animate={{ rotate: -360 }}
                     transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
                     className="absolute inset-[-10px] rounded-full border border-dashed border-[#e8a43a]/30"
                   />
-                  {/* Logo container */}
                   <div className="relative h-64 w-64 lg:h-80 lg:w-80 rounded-full border-2 border-[#e8a43a]/40 bg-[#0a0a0a] shadow-[0_0_60px_rgba(232,164,58,0.15)]">
                     <motion.div 
                       whileHover={{ scale: 1.05 }}
@@ -211,7 +152,6 @@ const Hero = () => {
               
               <div className="hidden lg:block h-2" />
 
-              {/* Content Section */}
               <div className="flex-1 text-center lg:text-left">
                 <motion.div
                   initial={{ opacity: 0, y: 50 }}
@@ -229,19 +169,12 @@ const Hero = () => {
                       style={{ transformStyle: "preserve-3d" }}
                       className="deadwood-font text-4xl sm:text-6xl lg:text-8xl font-extrabold uppercase leading-none tracking-widest drop-shadow-xl"
                     >
-                      <span className="text-gradient-amber block">
-                        FLESH-N-INK
-                      </span>
-                      <span className="text-[#f5f5f5] block mt-2">
-                        TATTOO
-                      </span>
-                      <span className="text-gradient-amber block mt-2">
-                        STUDIO
-                      </span>
+                      <span className="text-gradient-amber block">FLESH-N-INK</span>
+                      <span className="text-[#f5f5f5] block mt-2">TATTOO</span>
+                      <span className="text-gradient-amber block mt-2">STUDIO</span>
                     </motion.h1>
                   </div>
 
-                  {/* Tagline */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -255,7 +188,6 @@ const Hero = () => {
                     </div>
                   </motion.div>
 
-                  {/* CTA Buttons */}
                   <motion.div 
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -264,14 +196,10 @@ const Hero = () => {
                   >
                     <motion.button
                       onClick={() => window.open("https://wa.me/+27814071917", "_blank")}
-                      whileHover={{ 
-                        scale: 1.05,
-                        boxShadow: "0 0 40px rgba(232, 164, 58, 0.4)"
-                      }}
+                      whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(232, 164, 58, 0.4)" }}
                       whileTap={{ scale: 0.95 }}
                       className="group px-10 py-4 bg-gradient-to-r from-[#e8a43a] to-[#f5c67b] text-[#050505] font-bold uppercase text-sm tracking-widest rounded-none relative overflow-hidden"
                     >
-                      {/* Button shine effect */}
                       <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                       <span className="flex items-center justify-center gap-3 relative z-10">
                         <FaCalendarAlt className="w-4 h-4" />
@@ -281,10 +209,7 @@ const Hero = () => {
 
                     <a href="#gallery">
                       <motion.button
-                        whileHover={{ 
-                          scale: 1.05,
-                          backgroundColor: "rgba(232, 164, 58, 0.15)"
-                        }}
+                        whileHover={{ scale: 1.05, backgroundColor: "rgba(232, 164, 58, 0.15)" }}
                         whileTap={{ scale: 0.95 }}
                         className="px-10 py-4 bg-transparent border-2 border-[#e8a43a] text-[#e8a43a] font-bold uppercase text-sm tracking-widest rounded-none hover:bg-[#e8a43a]/10 transition-all duration-300"
                       >
@@ -296,7 +221,6 @@ const Hero = () => {
               </div>
             </div>
 
-            {/* Social Media Links - Refined */}
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
@@ -325,7 +249,6 @@ const Hero = () => {
               </div>
             </motion.div>
 
-            {/* Scroll indicator */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
